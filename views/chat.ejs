@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1>Anonymous ChatApp</h1>
+    <div class="box">
+        <h3 id="roomId">
+            Room ID: <%=roomId%>
+        </h3>
+        <h4>If You Will Refresh It Will Clear The Older Chat</h4>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="message" autocomplete="off" /><button>Send</button>
+        </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+
+        const roomId = '<%=roomId%>';
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const message = document.getElementById('message').value;
+            if (message) {
+                socket.emit('chat message', message);
+                document.getElementById('message').value = '';
+            }
+        });
+
+        socket.on('chat message', function (msg) {
+            const ul = document.getElementById('messages');
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(`-${msg}`));
+            ul.appendChild(li);
+        });
+        socket.emit('joinRoom', roomId);
+        console.log("from chat", roomId);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1>Home</h1>
+    <form action="/createchat" method="post">
+        <select name="roomType" id="">
+            <option value="One-to-One">One-to-One</option>
+            <option value="Group_Chat">Group Chat</option>
+        </select>
+        <input type="text" name="userName" placeholder="Your Name">
+        <br><br>
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit">Create Chat</button>
+    </form>
+    <hr>
+    <h2>Join Room Or Chat</h2>
+    <form action="/joinchat" method="post">
+        <input type="text" name="roomId" placeholder="Room ID">
+        <input type="password" name="password" placeholder="Password">
+        <input type="text" name="userName" placeholder="Username">
+        <input type="submit">
+    </form>
+</body>
+
+</html>
